@@ -1,4 +1,8 @@
-"""CS 61A Presents The Game of Hog."""
+"""CS 61A Presents The Game of Hog.
+
+This is a simulation of the Game Hog, created by tehnoobface/Maclean Sherren, for a CS Python class project
+
+"""
 
 from dice import six_sided, four_sided, make_test_dice
 from ucb import main, trace, interact
