@@ -20,7 +20,7 @@ def roll_dice(num_rolls, dice=six_sided):
     # These assert statements ensure that num_rolls is a positive integer.
     assert type(num_rolls) == int, 'num_rolls must be an integer.'
     assert num_rolls > 0, 'Must roll at least once.'
-    # BEGIN PROBLEM 1
+
     sum = 0
     have_num_one = False
     while num_rolls > 0:
@@ -34,14 +34,14 @@ def roll_dice(num_rolls, dice=six_sided):
         return 1
     else:
         return sum
-    # END PROBLEM 1
+
 
 def picky_piggy(score):
     """Return the points scored from rolling 0 dice.
 
     score:  The opponent's current score.
     """
-    # BEGIN PROBLEM 2
+
     if score == 0:
         return 7
     number = 142857
@@ -51,7 +51,7 @@ def picky_piggy(score):
     n = (number//pow(10,(6 - pos))) % 10
     return n
 
-    # END PROBLEM 2
+
 
 
 def take_turn(num_rolls, opponent_score, dice=six_sided, goal=GOAL_SCORE):
@@ -69,11 +69,11 @@ def take_turn(num_rolls, opponent_score, dice=six_sided, goal=GOAL_SCORE):
     assert num_rolls >= 0, 'Cannot roll a negative number of dice in take_turn.'
     assert num_rolls <= 10, 'Cannot roll more than 10 dice.'
     assert opponent_score < goal, 'The game should be over.'
-    # BEGIN PROBLEM 3
+
     if num_rolls == 0:
         return picky_piggy(opponent_score)
     return roll_dice(num_rolls, dice)
-    # END PROBLEM 3
+
 
 
 def hog_pile(player_score, opponent_score):
@@ -82,11 +82,11 @@ def hog_pile(player_score, opponent_score):
     player_score:   The total score of the current player.
     opponent_score: The total score of the other player.
     """
-    # BEGIN PROBLEM 4
+
     if player_score!= opponent_score:
         return 0
     return player_score
-    # END PROBLEM 4
+
 
 
 def next_player(who):
@@ -123,7 +123,7 @@ def play(strategy0, strategy1, score0=0, score1=0, dice=six_sided,
     say:        The commentary function to call at the end of the first turn.
     """
     who = 0  # Who is about to take a turn, 0 (first) or 1 (second)
-    # BEGIN PROBLEM 5
+
     while score0 < goal and score1 < goal:
         if who == 0:
             num_rolls = strategy0(score0, score1)
@@ -136,12 +136,12 @@ def play(strategy0, strategy1, score0=0, score1=0, dice=six_sided,
             if hog_pile(score1, score0):
                 score1 = score1 * 2
         who = next_player(who)
-    # END PROBLEM 5
+
 
     # (note that the indentation for the problem 6 prompt (***YOUR CODE HERE***) might be misleading)
-    # BEGIN PROBLEM 6
+
         say = say(score0, score1)
-    # END PROBLEM 6
+
     return score0, score1
 
 
@@ -217,7 +217,7 @@ def announce_highest(who, last_score=0, running_high=0):
     30 point(s)! That's a record gain for Player 1!
     """
     assert who == 0 or who == 1, 'The who argument should indicate a player.'
-    # BEGIN PROBLEM 7
+
     def say(score0, score1):
         if who == 0:
             current_score = score0
@@ -228,7 +228,7 @@ def announce_highest(who, last_score=0, running_high=0):
         return announce_highest(who, current_score, max(current_gain, running_high))
     return say
 
-    # END PROBLEM 7
+
 
 
 #######################
@@ -266,7 +266,7 @@ def make_averaged(original_function, trials_count=1000):
     >>> averaged_dice(1, dice)
     3.0
     """
-    # BEGIN PROBLEM 8
+
     def average(*args):
         i, total = 0,0
         while i < trials_count:
@@ -275,7 +275,7 @@ def make_averaged(original_function, trials_count=1000):
         return total / trials_count
     return average
 
-    # END PROBLEM 8
+
 
 
 def max_scoring_num_rolls(dice=six_sided, trials_count=1000):
@@ -287,7 +287,7 @@ def max_scoring_num_rolls(dice=six_sided, trials_count=1000):
     >>> max_scoring_num_rolls(dice)
     1
     """
-    # BEGIN PROBLEM 9
+
     averaged_dice = make_averaged(roll_dice, trials_count)
     best_dice_role, highest_score = 1,1
     for num_rolls in range(1, 11):
@@ -295,7 +295,7 @@ def max_scoring_num_rolls(dice=six_sided, trials_count=1000):
         if score > highest_score:
             highest_score, best_dice_role = score, num_rolls
     return best_dice_role
-    # END PROBLEM 9
+
 
 
 def winner(strategy0, strategy1):
@@ -334,11 +334,11 @@ def picky_piggy_strategy(score, opponent_score, cutoff=8, num_rolls=6):
     """This strategy returns 0 dice if that gives at least CUTOFF points, and
     returns NUM_ROLLS otherwise.
     """
-    # BEGIN PROBLEM 10
+
     if picky_piggy(opponent_score) >= cutoff:
         return 0
     return num_rolls
-    # END PROBLEM 10
+
 
 
 def hog_pile_strategy(score, opponent_score, cutoff=8, num_rolls=6):
@@ -346,14 +346,14 @@ def hog_pile_strategy(score, opponent_score, cutoff=8, num_rolls=6):
     effect. It also returns 0 dice if it gives at least CUTOFF points.
     Otherwise, it returns NUM_ROLLS.
     """
-    # BEGIN PROBLEM 11
+
     zero_roll = score + picky_piggy(opponent_score)
     if opponent_score == zero_roll or picky_piggy(opponent_score) >= cutoff:
         return 0
     else:
         return num_rolls
 
-    # END PROBLEM 11
+
 
 
 def final_strategy(score, opponent_score):
@@ -361,9 +361,9 @@ def final_strategy(score, opponent_score):
 
     *** YOUR DESCRIPTION HERE ***
     """
-    # BEGIN PROBLEM 12
+
     return 6  # Remove this line once implemented.
-    # END PROBLEM 12
+
 
 ##########################
 # Command Line Interface #
